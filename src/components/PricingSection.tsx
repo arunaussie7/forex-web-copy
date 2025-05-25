@@ -1,7 +1,32 @@
 import React from 'react';
 import { Check } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const PricingSection = () => {
+  const navigate = useNavigate();
+
+  const scrollToContact = () => {
+    // Navigate to home page first
+    navigate('/');
+    
+    // Wait for the page to load and then scroll to contact section
+    setTimeout(() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        const navbar = document.querySelector('nav');
+        const navbarHeight = navbar ? navbar.offsetHeight : 0;
+        
+        const elementPosition = contactSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  };
+
   return (
     <div className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,127 +39,147 @@ const PricingSection = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           {/* Basic Plan */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-shadow duration-300">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold text-gray-900">Basic</h3>
-              <div className="px-4 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">
-                3 Months
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:border-forex-green/30 transition-all duration-300">
+            <div className="flex flex-col h-full">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Basic</h3>
+                <div className="flex items-baseline">
+                  <span className="text-4xl font-bold text-forex-green">$199</span>
+                  <span className="text-gray-500 ml-2">/3 months</span>
+                </div>
               </div>
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Basic Trading Strategy</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>24/5 Customer Support</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Email Support</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Basic Risk Management</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Monthly Performance Reports</span>
+                </li>
+              </ul>
+              <button 
+                onClick={scrollToContact}
+                className="w-full bg-forex-green hover:bg-forex-darkgreen text-white py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Get Started
+              </button>
             </div>
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-gray-900">$199</span>
-              <span className="text-gray-500 ml-2">/quarter</span>
-            </div>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>1 Live Trading Account</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Full Access to Trading Bot</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>24/7 Customer Support</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Real-time Trade Monitoring</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Risk Management Tools</span>
-              </li>
-            </ul>
-            <button className="w-full py-4 px-8 text-white bg-forex-green rounded-xl hover:bg-forex-green/90 transition-colors duration-200 font-semibold">
-              Get Started
-            </button>
           </div>
 
           {/* Gold Plan */}
-          <div className="bg-white rounded-2xl shadow-xl border-2 border-forex-green p-8 hover:shadow-2xl transition-shadow duration-300 relative">
-            <div className="absolute top-0 right-8 transform -translate-y-1/2">
-              <div className="bg-forex-green text-white px-4 py-1 rounded-full text-sm font-medium">
+          <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-forex-green relative hover:shadow-xl transition-all duration-300">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span className="bg-forex-green text-white text-sm font-medium px-4 py-1 rounded-full">
                 Most Popular
+              </span>
+            </div>
+            <div className="flex flex-col h-full">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Gold</h3>
+                <div className="flex items-baseline">
+                  <span className="text-4xl font-bold text-forex-green">$199</span>
+                  <span className="text-gray-500 ml-2">/6 months</span>
+                </div>
+                <p className="text-sm text-gray-500 mt-2">+ 15% Profit Sharing</p>
               </div>
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Basic Trading Strategy</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>24/5 Customer Support</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Priority Email Support</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Enhanced Risk Management</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Weekly Performance Reports</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Basic Technical Analysis</span>
+                </li>
+              </ul>
+              <button 
+                onClick={scrollToContact}
+                className="w-full bg-forex-green hover:bg-forex-darkgreen text-white py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Get Started
+              </button>
             </div>
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold text-gray-900">Gold</h3>
-              <div className="px-4 py-1 bg-green-50 text-forex-green rounded-full text-sm font-medium">
-                6 Months
-              </div>
-            </div>
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-gray-900">$249</span>
-              <span className="text-gray-500 ml-2">/semi-annual</span>
-            </div>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>All Basic Features</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Priority Customer Support</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Advanced Trading Strategies</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Performance Analytics</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Email Trade Notifications</span>
-              </li>
-            </ul>
-            <button className="w-full py-4 px-8 text-white bg-forex-green rounded-xl hover:bg-forex-green/90 transition-colors duration-200 font-semibold">
-              Get Started
-            </button>
           </div>
 
           {/* Elite Plan */}
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 hover:shadow-2xl transition-shadow duration-300">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-2xl font-bold text-gray-900">Elite</h3>
-              <div className="px-4 py-1 bg-purple-50 text-purple-600 rounded-full text-sm font-medium">
-                Annual
+          <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 hover:border-forex-green/30 transition-all duration-300">
+            <div className="flex flex-col h-full">
+              <div className="mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Elite</h3>
+                <div className="flex items-baseline">
+                  <span className="text-4xl font-bold text-forex-green">$249</span>
+                  <span className="text-gray-500 ml-2">/year</span>
+                </div>
+                <p className="text-sm text-gray-500 mt-2">+ 20% Profit Sharing</p>
               </div>
+              <ul className="space-y-4 mb-8 flex-grow">
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Basic Trading Strategy</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>24/5 Customer Support</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Priority Email & Chat Support</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Advanced Risk Management</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Daily Performance Reports</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Advanced Technical Analysis</span>
+                </li>
+                <li className="flex items-center text-gray-600">
+                  <Check className="text-forex-green mr-2" size={20} />
+                  <span>Market Sentiment Analysis</span>
+                </li>
+              </ul>
+              <button 
+                onClick={scrollToContact}
+                className="w-full bg-forex-green hover:bg-forex-darkgreen text-white py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Get Started
+              </button>
             </div>
-            <div className="mb-8">
-              <span className="text-4xl font-bold text-gray-900">$349</span>
-              <span className="text-gray-500 ml-2">/year</span>
-            </div>
-            <ul className="space-y-4 mb-8">
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>All Gold Features</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>VIP Customer Support</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Custom Strategy Configuration</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Advanced Risk Management</span>
-              </li>
-              <li className="flex items-center text-gray-600">
-                <Check className="h-5 w-5 text-forex-green mr-3" />
-                <span>Monthly Strategy Review</span>
-              </li>
-            </ul>
-            <button className="w-full py-4 px-8 text-white bg-forex-green rounded-xl hover:bg-forex-green/90 transition-colors duration-200 font-semibold">
-              Get Started
-            </button>
           </div>
         </div>
 
@@ -153,8 +198,8 @@ const PricingSection = () => {
               <div className="text-forex-green mb-4">
                 <Check className="h-8 w-8 mx-auto" />
               </div>
-              <h4 className="text-lg font-semibold mb-2">24/7 Support</h4>
-              <p className="text-gray-600">Round-the-clock customer assistance</p>
+              <h4 className="text-lg font-semibold mb-2">24/5 Support</h4>
+              <p className="text-gray-600">Dedicated customer assistance</p>
             </div>
             <div className="p-6 bg-white rounded-xl shadow-md">
               <div className="text-forex-green mb-4">
@@ -171,6 +216,12 @@ const PricingSection = () => {
               <p className="text-gray-600">Continuous improvements and optimizations</p>
             </div>
           </div>
+          <button 
+            onClick={scrollToContact}
+            className="mt-12 bg-forex-green hover:bg-forex-darkgreen text-white py-3 px-8 rounded-lg transition-colors duration-300 text-lg font-medium"
+          >
+            Get Started Now
+          </button>
         </div>
       </div>
     </div>

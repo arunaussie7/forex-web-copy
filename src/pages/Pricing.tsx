@@ -1,11 +1,13 @@
 import React from 'react';
 import PricingSection from '../components/PricingSection';
+import Navbar from '../components/Navbar';
 
 const Pricing = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <Navbar />
       {/* Hero Section */}
-      <div className="bg-gray-900 text-white py-20">
+      <div className="bg-gray-900 text-white py-20 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Choose Your Trading Journey

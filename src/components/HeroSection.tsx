@@ -1,9 +1,12 @@
-import { ArrowDown, ChevronRight } from 'lucide-react';
+import { ArrowDown, ChevronRight, ArrowRight } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import BackgroundVisuals from './BackgroundVisuals';
-import TickerStrip from './TickerStrip';
+import styles from './HeroSection.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -11,30 +14,21 @@ const HeroSection = () => {
     }
   };
 
+  const goToPricing = () => {
+    navigate('/pricing');
+  };
+
   return (
     <section id="home" className="relative min-h-[90vh] flex flex-col items-center justify-center pt-16 pb-16 overflow-hidden bg-gray-900">
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <video
-          className="absolute w-full h-full object-cover transform scale-80"
-          autoPlay
-          muted
-          loop
-          playsInline
+        <img
+          src="https://images.unsplash.com/photo-1623524713064-257294b0e34b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Professional Forex Trading Background"
+          className="absolute w-full h-full object-cover"
           style={{ opacity: 0.6 }}
-        >
-          <source src="/earth.mp4" type="video/mp4" />
-        </video>
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900/40 to-gray-900/70"></div>
-      </div>
-      
-      {/* Ticker Strip */}
-      <div className="w-full fixed top-[64px] z-20">
-        <div className="w-full bg-white/95 backdrop-blur-sm border-b border-gray-200">
-          <div className="w-full">
-            <TickerStrip type="stocks" className="py-4" />
-          </div>
-        </div>
       </div>
       
       <div className="w-full relative z-10 mt-32">
@@ -53,19 +47,28 @@ const HeroSection = () => {
             <p className="text-xl md:text-2xl text-gray-300 mb-14 max-w-2xl mx-auto leading-relaxed tracking-wide">
               Maximize profits while minimizing risk with our sophisticated algorithms that eliminate emotional trading decisions.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-8 mb-16">
+            <div className="flex flex-col sm:flex-row justify-center gap-6 mb-16">
               <button 
                 onClick={() => scrollToSection('products')}
-                className="bg-forex-green hover:bg-forex-darkgreen text-white px-10 py-4 rounded-full text-lg tracking-wide transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center group"
+                className="group relative px-10 py-4 rounded-full text-lg tracking-wide transition-all duration-500 transform hover:scale-[1.02] shadow-lg overflow-hidden bg-white"
               >
-                Explore Products
-                <ChevronRight className="ml-3 group-hover:translate-x-1 transition-transform duration-300" size={24} />
+                <div className={`absolute inset-0 bg-white ${styles.animateGradient} group-hover:bg-gray-50`}></div>
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.8)_0%,_transparent_50%)] group-hover:${styles.animateRipple}`}></div>
+                <span className="relative flex items-center justify-center text-gray-900 font-semibold">
+                  Explore Products
+                  <ArrowRight className="ml-3 transition-transform duration-500 group-hover:translate-x-1" size={20} />
+                </span>
               </button>
               <button 
-                onClick={() => scrollToSection('contact')}
-                className="bg-white/10 hover:bg-white/20 text-white px-10 py-4 rounded-full text-lg tracking-wide transition-all duration-300 backdrop-blur-sm flex items-center justify-center"
+                onClick={goToPricing}
+                className="group relative px-10 py-4 rounded-full text-lg tracking-wide transition-all duration-500 transform hover:scale-[1.02] overflow-hidden bg-white"
               >
-                Contact Us
+                <div className="absolute inset-0 bg-white group-hover:bg-gray-50 transition-colors duration-500"></div>
+                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_center,_rgba(220,220,220,0.3)_0%,_transparent_50%)] group-hover:${styles.animateRipple}`}></div>
+                <span className="relative flex items-center justify-center text-gray-900 font-semibold group-hover:text-gray-800 transition-colors duration-500">
+                  View Pricing
+                  <ArrowRight className="ml-3 transition-transform duration-500 group-hover:translate-x-1" size={20} />
+                </span>
               </button>
             </div>
             <div className="flex items-center justify-center gap-16 mt-8">
@@ -92,13 +95,13 @@ const HeroSection = () => {
             <HoverCardTrigger asChild>
               <button 
                 onClick={() => scrollToSection('about')} 
-                className="animate-bounce bg-white/10 hover:bg-white/20 p-3 rounded-full shadow-premium group backdrop-blur-sm"
+                className="group animate-bounce bg-white/10 hover:bg-white/20 p-3 rounded-full shadow-premium backdrop-blur-sm transition-all duration-500 hover:shadow-forex-green/20"
               >
-                <ArrowDown className="text-forex-green group-hover:text-forex-darkgreen transition-colors" size={28} />
+                <ArrowDown className="text-forex-green group-hover:text-forex-green/80 transition-colors duration-500" size={28} />
               </button>
             </HoverCardTrigger>
-            <HoverCardContent className="w-auto">
-              <p className="text-sm tracking-wide">Scroll down to learn more</p>
+            <HoverCardContent className="w-auto bg-white/10 backdrop-blur-md border-forex-green/20">
+              <p className="text-sm tracking-wide text-white/90">Scroll down to learn more</p>
             </HoverCardContent>
           </HoverCard>
         </div>
